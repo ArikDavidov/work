@@ -1,0 +1,60 @@
+#include <stdio.h>
+
+void OtherFoo()
+{
+	printf("I am in other\n");
+	
+}
+
+/**
+ * I am in main
+ * I am in foo
+ * SP Top: (&i) 0xbfc047d8, Value: 5 
+ *     +4: (?) 0xbfc047dc, Value: 0x33f87800 871921664 
+ *     +8: (Canaries) 0xbfc047e0, Value: 0xb771d000 -1217277952 
+ *    +12: (Canaries) 0xbfc047e4, Value: 0xb771d000 -1217277952 
+ *    +16: (BP) 0xbfc047e8, Value: 0xbfc04808 -1077917688 
+ *    +16: (return eip) 0xbfc047ec, Value: 0x8048678 134514296 
+ *    +16: (BP) 0xbfc047f0, Value: 0x2 2 
+ *    +16: (BP) 0xbfc047f4, Value: 0x3 3 
+ *    +16: (BP) 0xbfc047f8, Value: 0xbfc048bc -1077917508 
+ * I am in other
+ * Segmentation fault (core dumped)
+ */
+ 
+int foo(int a, int b)
+{
+	int i = 5;
+	
+	printf("I am in foo\n");
+	
+	printf("SP Top: (&i)		%p, Value: %d \n", (void*)&i, i);
+	printf("    +4: (?)	%p, Value: %p %d \n", (void*)(&i + 1), *((void**)(&i + 1)), *(&i + 1));
+	printf("    +8: (Canaries)	%p, Value: %p %d \n", (void*)(&i + 2), *((void**)(&i + 2)), *(&i + 2));
+	printf("   +12: (Canaries) %p, Value: %p %d \n", (void*)(&i + 3), *((void**)(&i + 3)), *(&i + 3));
+	printf("   +16: (BP) %p, Value: %p %d \n", (void*)(&i + 4), *((void**)(&i + 4)), *(&i + 4));
+	printf("   +20: (BP) %p, Value: %p %d \n", (void*)(&i + 5), *((void**)(&i + 5)), *(&i + 5));	
+	printf("   +24: (BP) %p, Value: %p %d \n", (void*)(&i + 6), *((void**)(&i + 6)), *(&i + 6));	
+	printf("   +28: (BP) %p, Value: %p %d \n", (void*)(&i + 7), *((void**)(&i + 7)), *(&i + 7));	
+	printf("   +32: (BP) %p, Value: %p %d \n", (void*)(&i + 8), *((void**)(&i + 8)), *(&i + 8));	
+
+	*((void**)(&i + 5)) = OtherFoo;	
+			
+	return i + b;
+}
+
+int main()
+{
+	printf("I am in main\n");
+	
+	foo(2, 3);
+	
+	return 0;
+}
+
+
+
+
+
+
+

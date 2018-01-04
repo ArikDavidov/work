@@ -1,0 +1,33 @@
+#include "ListeningSocket.h"
+
+#include <iostream>
+#include <set>
+#include <tr1/memory>
+
+using namespace net;
+
+
+int main()
+{
+    std::tr1::shared_ptr<ListeningSocket> a (new ListeningSocket(1111, 32));
+    std::tr1::shared_ptr<ListeningSocket> b (new ListeningSocket(1112, 32));
+    std::tr1::shared_ptr<ListeningSocket> c (new ListeningSocket(2222, 32));
+
+    std::set<std::tr1::shared_ptr<Socket>, Socket::Less> set;
+
+    set.insert(b);
+	set.insert(c);
+    set.insert(a);
+
+	std::set<std::tr1::shared_ptr<Socket>, Socket::Less>::iterator it;
+	for (it=set.begin(); it!=set.end(); ++it)
+	{
+    	std::cout << ' ' << **it;
+  		std::cout << '\n';
+    }
+
+
+    return 0;
+}
+
+

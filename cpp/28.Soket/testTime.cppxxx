@@ -1,0 +1,71 @@
+// std_tr1__memory__static_pointer_cast.cpp 
+// compile with: /EHsc 
+#include "Timestamp.h"
+
+#include <stdlib.h>
+#include <sys/time.h>
+#include <unistd.h>
+
+
+#include <tr1/memory> 
+#include <iostream> 
+#include <list> 
+#include <vector> 
+
+struct base 
+{ 
+    int val; 
+}; 
+
+struct derived 
+: public base 
+{ 
+}; 
+
+int main()
+{ 
+    // struct timeval a;
+    // struct timeval b;
+    net::Timestamp a;
+    // usleep(20000);
+    net::Timestamp b;
+    net::Timestamp c;
+
+    // gettimeofday(&a, NULL);
+    // printf("a: %ld.%06ld\n", a.tv_sec, a.tv_usec);
+    
+    // gettimeofday(&b, NULL);
+    // printf("b: %ld.%06ld\n", b.tv_sec, b.tv_usec);
+
+    // gettimeofday(&a, NULL);
+    // printf("a: %ld.%06ld\n", a.tv_sec, a.tv_usec);
+    
+    // gettimeofday(&b, NULL);
+    // printf("b: %ld.%06ld\n", b.tv_sec, b.tv_usec);
+
+    std::cout << "(a < b): " << (a <= b) << std::endl;
+    std::cout << "(b < a): " << (b <= a) << std::endl;
+
+    // std::cout << "(a - b): " << (a - b) << std::endl;
+    std::cout << "(b - a): " << (b -= a) << std::endl;
+
+
+
+    return (0); 
+}
+
+    // std::list<std::pair<struct timeval, std::tr1::shared_ptr<base> > > a;
+    // std::tr1::shared_ptr<base> sp0(new derived);
+    // std::cout << "sizeof(sp0) == " << sizeof(sp0) << std::endl; 
+
+    // std::cout << "sizeof(struct timeval) == " << sizeof(struct timeval) << std::endl; 
+
+    // std::tr1::shared_ptr<derived> sp1 = 
+    // std::tr1::static_pointer_cast<derived>(sp0);
+
+    // std::tr1::shared_ptr<std::vector<std::tr1::shared_ptr<base> > >
+    // readySokets(new std::vector<std::tr1::shared_ptr<base> >);
+
+    // sp0->val = 3; 
+    // std::cout << "sp1->val == " << sp1->val << std::endl; 
+

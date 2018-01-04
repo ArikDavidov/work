@@ -1,0 +1,19 @@
+FLAGS = -g -ansi -pedantic -Wall -Wconversion -I$(INC_PATH)
+INC_PATH = ../inc
+LIB_PATH = ../lib
+
+testTree.out: testTree.c $(LIB_PATH)/libTree.a
+	gcc $(FLAGS) -o $@ testTree.c $(LIB_PATH)/libTree.a
+	
+$(LIB_PATH)/libTree.a: Tree.o
+	ar -cvq libTree.a Tree.o
+	mv libTree.a $(LIB_PATH)
+
+Tree.o: Tree.c $(INC_PATH)/Tree.h
+	gcc $(FLAGS) -c Tree.c
+
+clean:
+	rm testTree.out $(LIB_PATH)/libTree.a Tree.o
+
+
+

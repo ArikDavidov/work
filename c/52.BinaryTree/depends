@@ -1,0 +1,2 @@
+testTree.o: testTree.c ../inc/Tree.h
+Tree.o: Tree.c ../inc/Tree.h

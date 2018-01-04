@@ -1,0 +1,7 @@
+gfdx
+ [# ]
+Level = LOG_CRITICAL
+Path = /home/arik/Desktop/work/58.Logger
+ File = Logger.txt
+
+

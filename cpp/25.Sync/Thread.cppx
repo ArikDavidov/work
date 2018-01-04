@@ -1,0 +1,16 @@
+#include "Thread.h"
+
+namespace advcpp
+{
+namespace sync
+{
+
+
+
+
+
+}   // namespace sync
+
+}   // namespace advcpp
+
+

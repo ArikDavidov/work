@@ -1,0 +1,46 @@
+#include "Location.h"
+
+#include <iostream>
+
+
+int main()
+{
+    EventFilter* = new EventFilter("fire", "floor_01", "room_011");
+    
+    CompositeLocation* building = new CompositeLocation("", "");
+    
+    if (eventFilter->Floor() == "")
+    {
+        building->Add(EventFilter);
+    }
+    
+    CompositeLocation* floor = building->GetChild(eventFilter->Floor());
+    if (!floor)
+    {
+        floor = new CompositeLocation(eventFilter->Floor(), "");
+    }
+    
+    if (eventFilter->Room() == "")
+    {
+        floor->Add(EventFilter);
+    }
+    
+    CompositeLocation* room = floor->GetChild(eventFilter->Room());
+    if (!room)
+    {
+        room = new CompositeLocation(eventFilter->Floor(), eventFilterd->Room());
+    }
+    
+    room->Add(EventFilter);
+    
+    
+    return 0;
+}
+
+
+
+
+
+
+
+

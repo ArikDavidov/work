@@ -1,0 +1,63 @@
+
+
+
+turn
+	++turn
+	turn += 2
+
+
+
+
+player
+	attack();
+	Card* AttemptDefense();
+	
+	m_numOfCards;
+Hand
+	m_hand;
+	IsHandEmpty();
+
+
+Card
+	m_rank
+	m_suit
+
+deck
+	Deck_t(_nRanks = 13, _nSuits = 4);
+	for (int i = 0; i < _nSuits)
+	for (int i = 0; i < _nRanks
+	
+	
+	
+	nRanks = 
+
+
+
+	Shuffle();
+	
+Table
+	m_attackingCard;
+	m_defendingCard;
+	m_discardPile
+
+	
+Game
+	Game(nPlayers);
+	Deal();
+	m_pack()
+
+
+if (
+
+Players
+	GetFirstAttacker();
+	GetNextAttacker();
+	GetNextDefender();
+	Player* attacker;
+	Player* defender;
+
+
+
+
+
+

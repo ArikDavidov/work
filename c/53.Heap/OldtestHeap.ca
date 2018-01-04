@@ -1,0 +1,308 @@
+#include "Vector.h"
+#include "Heap.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef enum
+{
+	FAILED,
+	PASSED
+} TestResult;
+
+void PrintTestResult(TestResult res, char* testName)
+{	
+	if(FAILED == res)
+	{	
+		printf("FAILED: %s\n", testName);
+	}
+	else
+	{
+		printf("PASSED: %s\n", testName);
+	}
+}
+
+int Less(const void* _left, const void* _right)
+{
+	return (*(int*)_left < *(int*)_right) ? 1 : 0;
+}
+
+void Destroyer(void* _data)
+{
+	free(_data);
+}
+
+void TestBuild()
+{
+	TestResult res = FAILED;
+	Vector*	vec = NULL;
+	Heap* heap = NULL;
+
+	vec = VectorCreate(32, 16);
+	heap = HeapBuild(vec, Less);
+	if (NULL != heap)
+	{
+		res = PASSED;
+		HeapDestroy(&heap);
+	}	
+
+	VectorDestroy(&vec, Destroyer);
+	
+	PrintTestResult(res, "TestCreate");
+}
+
+void TestBuildNullVec()
+{
+	TestResult res = FAILED;
+	Heap* heap = NULL;
+
+	heap = HeapBuild(NULL, Less);
+	if (!heap)
+	{
+		res = PASSED;
+	}
+
+	PrintTestResult(res, "TestBuildNullVec");
+}
+
+void TestBuildNullLessFunc()
+{
+	TestResult res = FAILED;
+	Vector* vec = NULL;
+	Heap* heap = NULL;
+
+	vec = VectorCreate(32, 16);
+	heap = HeapBuild(vec, NULL);
+	if (!heap)
+	{
+		res = PASSED;		
+	}
+	VectorDestroy(&vec, Destroyer);
+	PrintTestResult(res, "TestBuildNullLessFunc");
+}
+
+
+void TestVecExistAfterHeapDestroy()
+{
+	TestResult res = FAILED;
+	Vector* vec = NULL;
+	Heap* heap = NULL;
+
+	vec = VectorCreate(32, 16);
+	heap = HeapBuild(vec, Less);
+	HeapDestroy(&heap);
+	if (vec)
+	{
+		res = PASSED;		
+		VectorDestroy(&vec, Destroyer);
+	}
+
+	PrintTestResult(res, "TestVecExistAfterHeapDestroy");
+}
+void TestDoubleDestroy()
+{
+	TestResult res = FAILED;
+	Vector* vec = NULL;
+	Heap* heap = NULL;
+
+	vec = VectorCreate(32, 16);
+	heap = HeapBuild(vec, Less);
+	
+	HeapDestroy(&heap);
+	HeapDestroy(&heap);
+	
+	/* If no segmentation fault occurred */
+	res = PASSED;
+	VectorDestroy(&vec, Destroyer);
+
+	PrintTestResult(res, "TestDoubleDestroy");	
+}
+
+void TestInsert()
+{
+	TestResult res = FAILED;
+	HeapResult ret;
+	Vector* vec = NULL;
+	Heap* heap = NULL;
+	int* num = NULL;
+
+	vec = VectorCreate(32, 16);
+	heap = HeapBuild(vec, Less);
+
+	num = malloc(sizeof(int));
+	*num = 1;
+	
+	ret = HeapInsert(heap, (void*)num);
+	if (HEAP_SUCCESS == ret)
+	{
+		res = PASSED;		
+	}
+
+	HeapDestroy(&heap);
+	VectorDestroy(&vec, Destroyer);
+	PrintTestResult(res, "TestInsert");
+}
+
+void TestInsertNullHeap()
+{
+	TestResult res = FAILED;
+	HeapResult ret;
+	int* num = NULL;
+
+	num = malloc(sizeof(int));
+	*num = 1;
+
+	ret = HeapInsert(NULL, (void*)num);
+	if (HEAP_NOT_INITIALIZED == ret)
+	{
+		res = PASSED;
+	}
+	PrintTestResult(res, "TestInsertNullHeap");
+}
+
+void TestInsertAfterDestroy()
+{
+	TestResult res = FAILED;
+	HeapResult ret;
+	Vector* vec = NULL;
+	Heap* heap = NULL;
+	int* num = NULL;
+
+	vec = VectorCreate(32, 16);
+	heap = HeapBuild(vec, Less);
+	HeapDestroy(&heap);
+
+	num = malloc(sizeof(int));
+	*num = 1;
+	ret = HeapInsert(heap, (void*)num);
+
+	if (HEAP_NOT_INITIALIZED == ret)
+	{
+		res = PASSED;		
+	}
+
+	VectorDestroy(&vec, Destroyer);
+	PrintTestResult(res, "TestInsertAfterDestroy");	
+}
+
+void TestPeek()
+{
+	TestResult res = FAILED;
+	const void* ret = NULL;
+	Vector* vec = NULL;
+	Heap* heap = NULL;
+	int* num = NULL;
+
+	vec = VectorCreate(32, 16);
+	heap = HeapBuild(vec, Less);
+
+	num = malloc(sizeof(int));
+	*num = 1;
+	
+	HeapInsert(heap, (void*)num);
+	ret = HeapPeek(heap);
+	if (1 == *(int*)ret)
+	{
+		res = PASSED;		
+	}
+
+	HeapDestroy(&heap);
+	VectorDestroy(&vec, Destroyer);
+	PrintTestResult(res, "TestPeek");
+}
+
+void TestExtract()
+{
+	TestResult res = FAILED;
+	Vector* vec = NULL;
+	Heap* heap = NULL;
+	int* num = NULL;
+	void* ret = NULL;
+
+	vec = VectorCreate(32, 16);
+	heap = HeapBuild(vec, Less);
+
+	num = malloc(sizeof(int));
+	*num = 1;
+	
+	HeapInsert(heap, (void*)num);
+
+	ret = HeapExtract(heap);
+	if (1 == *(int*)ret)
+	{
+		res = PASSED;		
+	}
+
+	HeapDestroy(&heap);
+	VectorDestroy(&vec, Destroyer);
+	PrintTestResult(res, "TestExtract");
+}
+
+void TestPeakAfterExtract()
+{
+	TestResult res = FAILED;
+	Vector* vec = NULL;
+	Heap* heap = NULL;
+	int* num = NULL;
+	void* ret = NULL;
+
+	vec = VectorCreate(32, 16);
+	heap = HeapBuild(vec, Less);
+
+	num = malloc(sizeof(int));
+	*num = 1;
+	
+	HeapInsert(heap, (void*)num);
+
+	ret = HeapExtract(heap);
+	if (1 == *(int*)ret)
+	{
+		res = PASSED;		
+	}
+
+	HeapDestroy(&heap);
+	VectorDestroy(&vec, Destroyer);
+}
+/*
+void TestBuildFromVectorWithValues()
+{
+	TestResult res = FAILED;
+	Vector*	vec = NULL;
+	Heap* heap = NULL;
+	int* num = NULL;
+
+	vec = VectorCreate(32, 16);
+	for (i = 0; i < 6; ++i)
+	{
+		num = malloc(sizeof(int));
+		*num = (int)i;
+		VectorAppend(vec, (void*)num);
+	}
+	heap = HeapBuild(vec, Less);
+
+	VectorDestroy(&vec, Destroyer);
+	PrintTestResult(res, "TestBuildFromVectorWithValues");	
+}
+*/
+int main()
+{
+	TestBuild();
+	TestBuildNullVec();
+	TestBuildNullLessFunc();
+	
+	TestVecExistAfterHeapDestroy();
+	TestDoubleDestroy();
+
+	TestInsert();
+	TestInsertNullHeap();
+	TestInsertAfterDestroy();
+	
+	TestPeek();
+	TestExtract();
+	/*
+	TestReachCapacityInFixedSizedVec();
+	TestPeakAfterExtract();
+	*/
+	return 0;
+}
+

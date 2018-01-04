@@ -1,0 +1,35 @@
+#include "Config.h"
+#include "SmartHome.h"
+//#include "AgentFactory.h"
+#include "Loader.h"
+
+
+#include "AgentData.h"	// std::cout << AgentData...
+
+#include <iostream>
+#include <string>
+#include <algorithm>    // std::for_each
+
+using namespace smartcampus;
+
+
+void PrintAgentsData(std::tr1::shared_ptr<AgentData> _sp)
+{
+    std::cout << *_sp << std::endl;
+}
+
+
+int main ()
+{
+    Config config("SarumanTower");
+    Loader loader;
+
+    std::tr1::shared_ptr<std::vector
+        <std::tr1::shared_ptr<AgentData> > > agentsData = config.GetAgetsData();
+
+    for_each(agentsData->begin(), agentsData->end(), PrintAgentsData);
+    
+    return 0;
+}
+
+

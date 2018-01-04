@@ -1,0 +1,2 @@
+testGV.o: testGV.c ../inc/Vector.h ../inc/mu_test.h
+Vector.o: Vector.c ../inc/Vector.h

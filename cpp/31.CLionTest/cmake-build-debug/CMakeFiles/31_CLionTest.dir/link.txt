@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/31_CLionTest.dir/main.cpp.o CMakeFiles/31_CLionTest.dir/TestClass.cpp.o CMakeFiles/31_CLionTest.dir/Test2.cpp.o  -o 31_CLionTest 

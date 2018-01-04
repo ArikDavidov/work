@@ -1,0 +1,14 @@
+#include "Agent.h"
+
+#include <iostream>
+
+
+
+int main ()
+{
+    Agent agent;
+    
+    return 0;
+}
+
+

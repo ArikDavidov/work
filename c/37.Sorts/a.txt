@@ -1,0 +1,102 @@
+
+1,000 items:
+    BobbleSort:
+        Best:    0.000039
+        Worst:   0.022750
+        Typical: 0.012898
+    ShakeSort:
+        Best:    0.000017
+        Worst:   0.013163
+        Typical: 0.010437
+    QuickSort:
+        Best:    0.000196
+        Worst:   0.002962
+        Typical: 0.000186
+    InsertionSort:
+        Best:    0.000016
+        Worst:   0.014348
+        Typical: 0.006724
+    ShellSort:
+        Best:    0.000126
+        Worst:   0.000247
+        Typical: 0.000422
+    MergeSortRec:
+        Best:    0.000001
+        Worst:   0.000002
+        Typical: 0.000002
+    CountingSort:
+        Best:    0.000032
+        Worst:   0.000021
+        Typical: 0.000354
+    RadixSort:
+        Best:    0.000194
+        Worst:   0.000194
+        Typical: 0.000253
+
+10,000 items:
+    BobbleSort:
+        Best:    0.000222
+        Worst:   1.372562
+        Typical: 1.369418
+    ShakeSort:
+        Best:    0.000175
+        Worst:   1.378836
+        Typical: 1.095726
+    QuickSort:
+        Best:    0.003136
+        Worst:   0.294964
+        Typical: 0.002575
+    InsertionSort:
+        Best:    0.000143
+        Worst:   1.615642
+        Typical: 0.775994
+    ShellSort:
+        Best:    0.001980
+        Worst:   0.003804
+        Typical: 0.007764
+    MergeSortRec:
+        Best:    0.001644
+        Worst:   0.002798
+        Typical: 0.003632
+    CountingSort:
+        Best:    0.000283
+        Worst:   0.000229
+        Typical: 0.000469
+    RadixSort:
+        Best:    0.002067
+        Worst:   0.002089
+        Typical: 0.002044
+
+50,000 items:
+    BobbleSort:
+        Best:    0.000816
+        Worst:   35.365387
+        Typical: 34.548649
+    ShakeSort:
+        Best:    0.000888
+        Worst:   34.712200
+        Typical: 26.041302
+    QuickSort:
+        Best:    0.013867
+        Worst:   7.124400
+        Typical: 0.014735
+    InsertionSort:
+        Best:    0.000767
+        Worst:   38.348244
+        Typical: 18.796532
+    ShellSort:
+        Best:    0.010854
+        Worst:   0.021874
+        Typical: 0.054067
+    MergeSortRec:
+        Best:    0.008954
+        Worst:   0.015990
+        Typical: 0.022501
+    CountingSort:
+        Best:    0.001233
+        Worst:   0.001208
+        Typical: 0.002619
+    RadixSort:
+        Best:    0.010463
+        Worst:   0.010668
+        Typical: 0.009740

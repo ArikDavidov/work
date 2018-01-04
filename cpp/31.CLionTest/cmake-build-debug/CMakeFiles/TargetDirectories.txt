@@ -1,0 +1,3 @@
+/home/arieldavidov/Desktop/work/cpp/31.CLionTest/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/arieldavidov/Desktop/work/cpp/31.CLionTest/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/arieldavidov/Desktop/work/cpp/31.CLionTest/cmake-build-debug/CMakeFiles/31_CLionTest.dir

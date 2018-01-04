@@ -1,0 +1,43 @@
+// std_tr1__memory__static_pointer_cast.cpp 
+// compile with: /EHsc 
+#include <tr1/memory> 
+#include <iostream> 
+#include <vector> 
+
+struct base 
+{ 
+    int val; 
+}; 
+
+struct derived 
+: public base 
+{ 
+}; 
+
+int main() 
+{ 
+    std::vector<std::tr1::shared_ptr<base> > a;
+    std::vector<std::tr1::shared_ptr<base> > b;
+
+    std::cout << "sizeof(a): " << sizeof(a) << std::endl; 
+    std::cout << "&b-&a: " << (char*)&b-(char*)&a << std::endl; 
+    
+
+    
+    std::tr1::shared_ptr<base> sp0(new derived); 
+    std::tr1::shared_ptr<derived> sp1 = 
+    std::tr1::static_pointer_cast<derived>(sp0);
+
+
+    std::tr1::shared_ptr<std::vector<std::tr1::shared_ptr<base> > >
+    readySokets(new std::vector<std::tr1::shared_ptr<base> >);
+
+    sp0->val = 3; 
+    std::cout << "sp1->val == " << sp1->val << std::endl; 
+
+    return (0); 
+}
+
+
+
+

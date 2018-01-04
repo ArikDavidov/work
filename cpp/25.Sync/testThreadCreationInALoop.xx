@@ -1,0 +1,20 @@
+#include "Thread.h"
+#include <vector>
+
+#include <iostream>
+#include <file>
+
+
+int main()
+{
+    
+    for (std::size_t i = 0; i < 2; ++i)
+    {
+        m_threads.push_back(std::tr1::shared_ptr<Thread<TaskRunner> >
+                            (new Thread<TaskRunner>(m_taskRunner, &TaskRunner::Run)));  
+    }
+    
+    return 0;
+}
+
+

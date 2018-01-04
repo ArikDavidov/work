@@ -1,0 +1,20 @@
+# Global definitions
+CC = gcc
+CFLAGS = -g -ansi -pedantic -Wall -Wconversion
+# directory structure
+INC_PATH ?= ../inc
+LIB_PATH = ../lib
+CFLAGS  += -I$(INC_PATH)
+
+testVec.out: testGV.c $(LIB_PATH)/libVector.a
+	gcc $(CFLAGS) -o $@ $<  $(LIB_PATH)/libVector.a
+	
+$(LIB_PATH)/libVector.a: Vector.o
+	ar -cvq libVector.a Vector.o
+	mv libVector.a $(LIB_PATH)
+
+Vector.o: Vector.c $(INC_PATH)/Vector.h
+
+clean:
+	rm *.out $(LIB_PATH)/libVector.a *.o
+
