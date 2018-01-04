@@ -16,7 +16,7 @@ class ILocation
 public:
     virtual ~ILocation();
     
-    virtual void Get(const std::vector
+    virtual void GetRelevantFilters(const std::vector
                      <std::tr1::shared_ptr<ILocation> >& _res) = 0;
     virtual std::string Floor() const = 0;
     virtual std::string Room() const = 0;
