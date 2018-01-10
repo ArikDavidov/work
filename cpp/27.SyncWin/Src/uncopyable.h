@@ -6,7 +6,7 @@ class uncopyable
 {
 protected:
 	uncopyable() {}
-	~uncopyable() {}b
+	~uncopyable() {}
 
 private:  // emphasize the following members are private
 	uncopyable(const uncopyable&);
