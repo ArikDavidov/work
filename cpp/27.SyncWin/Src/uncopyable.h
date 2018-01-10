@@ -6,11 +6,12 @@ class uncopyable
 {
 protected:
 	uncopyable() {}
-	~uncopyable() {}
+	~uncopyable() {}b
 
 private:  // emphasize the following members are private
 	uncopyable(const uncopyable&);
-	const uncopyable& operator=(const uncopyable&);
+	uncopyable& operator=(const uncopyable&);
 };
 
-#endif // !__UNCOPYABLE__
+
+#endif // __UNCOPYABLE__
